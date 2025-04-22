@@ -44,9 +44,7 @@ export function VehicleHealthChart() {
                 strokeWidth={2}
                 dot={false}
               />
-              <ChartTooltip>
-                <ChartTooltipContent />
-              </ChartTooltip>
+              <ChartTooltip content={<ChartTooltipContent />} />
             </LineChart>
           </ResponsiveContainer>
         </ChartContainer>

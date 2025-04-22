@@ -1,7 +1,7 @@
 
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Battery, Brake } from "lucide-react";
+import { Battery, CarFront } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface MaintenanceAlert {
@@ -27,7 +27,7 @@ const alerts: MaintenanceAlert[] = [
     component: "Brake System",
     prediction: "Service required in 30 days",
     confidence: 78,
-    icon: <Brake className="h-5 w-5" />,
+    icon: <CarFront className="h-5 w-5" />,
     severity: "medium"
   }
 ];
