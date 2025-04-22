@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/ui/app-sidebar";
@@ -9,6 +8,8 @@ import { StatsCards } from "@/components/dashboard/stats-cards";
 import { PredictiveChart } from "@/components/dashboard/predictive-chart";
 import { EquipmentHealth } from "@/components/dashboard/equipment-health";
 import { AlertsPanel } from "@/components/dashboard/alerts-data";
+import { VehicleHealthChart } from "@/components/dashboard/vehicle-health-chart";
+import { MaintenanceAlerts } from "@/components/dashboard/maintenance-alerts";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const Index = () => {
@@ -36,10 +37,8 @@ const Index = () => {
             <Separator className="my-4" />
             
             <div className="space-y-6">
-              {/* Stats Cards */}
               <StatsCards key={`stats-${refreshKey}`} />
               
-              {/* Tabs for main content */}
               <Tabs defaultValue="overview" className="space-y-4">
                 <TabsList>
                   <TabsTrigger value="overview">Overview</TabsTrigger>
@@ -48,7 +47,10 @@ const Index = () => {
                 </TabsList>
                 
                 <TabsContent value="overview" className="space-y-4">
-                  {/* Main charts */}
+                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                    <VehicleHealthChart key={`health-${refreshKey}`} />
+                    <MaintenanceAlerts key={`maintenance-${refreshKey}`} />
+                  </div>
                   <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
                     <PredictiveChart key={`chart-${refreshKey}`} />
                     <AlertsPanel key={`alerts-${refreshKey}`} />
