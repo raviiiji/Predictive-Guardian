@@ -12,6 +12,7 @@ import { AlertsPanel } from "@/components/dashboard/alerts-data";
 import { VehicleHealthChart } from "@/components/dashboard/vehicle-health-chart";
 import { MaintenanceAlerts } from "@/components/dashboard/maintenance-alerts";
 import { ModelTrainingVisualization } from "@/components/dashboard/model-training-visualization";
+import { VirtualEnvironment } from "@/components/dashboard/virtual-environment";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const Index = () => {
@@ -47,6 +48,7 @@ const Index = () => {
                   <TabsTrigger value="equipment">Equipment</TabsTrigger>
                   <TabsTrigger value="alerts">Alerts</TabsTrigger>
                   <TabsTrigger value="models">Model Training</TabsTrigger>
+                  <TabsTrigger value="environment">Environment</TabsTrigger>
                 </TabsList>
                 
                 <TabsContent value="overview" className="space-y-4">
@@ -84,6 +86,14 @@ const Index = () => {
                     <p className="text-sm text-muted-foreground">LSTM model training process and performance metrics</p>
                   </div>
                   <ModelTrainingVisualization key={`model-training-${refreshKey}`} />
+                </TabsContent>
+                
+                <TabsContent value="environment">
+                  <div className="mb-4">
+                    <h2 className="text-lg font-semibold">Development Environment</h2>
+                    <p className="text-sm text-muted-foreground">Monitor Docker containers and CI/CD workflows</p>
+                  </div>
+                  <VirtualEnvironment key={`environment-${refreshKey}`} />
                 </TabsContent>
               </Tabs>
             </div>
