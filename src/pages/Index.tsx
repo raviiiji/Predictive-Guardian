@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/ui/app-sidebar";
@@ -10,6 +11,7 @@ import { EquipmentHealth } from "@/components/dashboard/equipment-health";
 import { AlertsPanel } from "@/components/dashboard/alerts-data";
 import { VehicleHealthChart } from "@/components/dashboard/vehicle-health-chart";
 import { MaintenanceAlerts } from "@/components/dashboard/maintenance-alerts";
+import { ModelTrainingVisualization } from "@/components/dashboard/model-training-visualization";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const Index = () => {
@@ -44,6 +46,7 @@ const Index = () => {
                   <TabsTrigger value="overview">Overview</TabsTrigger>
                   <TabsTrigger value="equipment">Equipment</TabsTrigger>
                   <TabsTrigger value="alerts">Alerts</TabsTrigger>
+                  <TabsTrigger value="models">Model Training</TabsTrigger>
                 </TabsList>
                 
                 <TabsContent value="overview" className="space-y-4">
@@ -73,6 +76,14 @@ const Index = () => {
                   <div className="max-w-3xl">
                     <AlertsPanel key={`all-alerts-${refreshKey}`} />
                   </div>
+                </TabsContent>
+
+                <TabsContent value="models">
+                  <div className="mb-4">
+                    <h2 className="text-lg font-semibold">AI Model Training & Performance</h2>
+                    <p className="text-sm text-muted-foreground">LSTM model training process and performance metrics</p>
+                  </div>
+                  <ModelTrainingVisualization key={`model-training-${refreshKey}`} />
                 </TabsContent>
               </Tabs>
             </div>
