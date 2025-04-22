@@ -28,6 +28,14 @@ export default {
 					DEFAULT: 'hsl(var(--primary))',
 					foreground: 'hsl(var(--primary-foreground))'
 				},
+				kpit: {
+					blue: '#1A365D',
+					teal: '#2C7A7B',
+					slate: '#2D3748',
+					warning: '#FFC107',
+					danger: '#E53E3E',
+					success: '#38A169',
+				},
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary))',
 					foreground: 'hsl(var(--secondary-foreground))'
