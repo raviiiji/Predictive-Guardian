@@ -11,47 +11,76 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const menuItems = [
   {
     title: "Dashboard",
     icon: Home,
     url: "/",
-    active: true,
+    tabValue: "overview"
   },
   {
     title: "Equipment",
     icon: Cpu,
-    url: "#equipment",
+    url: "/#equipment",
+    tabValue: "equipment"
   },
   {
     title: "Monitoring",
     icon: Activity,
-    url: "#monitoring",
+    url: "/#monitoring",
+    tabValue: "overview"
   },
   {
     title: "Analytics",
     icon: BarChart3,
-    url: "#analytics",
+    url: "/#analytics",
+    tabValue: "models"
   },
   {
     title: "Alerts",
     icon: AlertTriangle,
-    url: "#alerts",
+    url: "/#alerts",
+    tabValue: "alerts"
   },
   {
     title: "Data Center",
     icon: Database,
-    url: "#data",
+    url: "/#data",
+    tabValue: "environment"
   },
   {
     title: "Settings",
     icon: Settings,
-    url: "#settings",
+    url: "/#settings",
+    tabValue: "overview"
   },
 ];
 
 export function AppSidebar() {
+  const location = useLocation();
+  const currentPath = location.pathname;
+
+  const handleNavigation = (event: React.MouseEvent<HTMLAnchorElement>, tabValue: string) => {
+    event.preventDefault();
+    
+    // Get the current URL and extract the hash part if it exists
+    const url = new URL(window.location.href);
+    
+    // Set the new hash value
+    url.hash = tabValue;
+    
+    // Update browser URL without navigating
+    window.history.pushState({}, "", url.toString());
+    
+    // Find the corresponding tab and click it
+    const tabElement = document.querySelector(`[data-state="inactive"][value="${tabValue}"]`);
+    if (tabElement) {
+      (tabElement as HTMLElement).click();
+    }
+  };
+
   return (
     <Sidebar>
       <SidebarContent>
@@ -61,8 +90,15 @@ export function AppSidebar() {
             <SidebarMenu>
               {menuItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild className={item.active ? "bg-accent text-white" : ""}>
-                    <a href={item.url} className="flex items-center gap-3">
+                  <SidebarMenuButton 
+                    asChild 
+                    className={(item.url === currentPath || (currentPath === "/" && item.title === "Dashboard")) ? "bg-accent text-white" : ""}
+                  >
+                    <a 
+                      href={item.url} 
+                      className="flex items-center gap-3"
+                      onClick={(e) => handleNavigation(e, item.tabValue)}
+                    >
                       <item.icon size={18} />
                       <span>{item.title}</span>
                       {item.title === "Alerts" && (

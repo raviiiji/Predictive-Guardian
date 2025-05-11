@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/ui/app-sidebar";
 import { Navbar } from "@/components/ui/navbar";
@@ -14,13 +14,24 @@ import { MaintenanceAlerts } from "@/components/dashboard/maintenance-alerts";
 import { ModelTrainingVisualization } from "@/components/dashboard/model-training-visualization";
 import { VirtualEnvironment } from "@/components/dashboard/virtual-environment";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useLocation } from "react-router-dom";
 
 const Index = () => {
   const [refreshKey, setRefreshKey] = useState(0);
+  const [activeTab, setActiveTab] = useState("overview");
+  const location = useLocation();
   
   const handleRefresh = () => {
     setRefreshKey(prev => prev + 1);
   };
+
+  // Handle URL hash changes
+  useEffect(() => {
+    const hash = location.hash.replace("#", "");
+    if (hash && ["overview", "equipment", "alerts", "models", "environment"].includes(hash)) {
+      setActiveTab(hash);
+    }
+  }, [location.hash]);
 
   return (
     <SidebarProvider>
@@ -42,7 +53,7 @@ const Index = () => {
             <div className="space-y-6">
               <StatsCards key={`stats-${refreshKey}`} />
               
-              <Tabs defaultValue="overview" className="space-y-4">
+              <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-4">
                 <TabsList>
                   <TabsTrigger value="overview">Overview</TabsTrigger>
                   <TabsTrigger value="equipment">Equipment</TabsTrigger>
