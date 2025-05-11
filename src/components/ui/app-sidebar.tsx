@@ -23,37 +23,37 @@ const menuItems = [
   {
     title: "Equipment",
     icon: Cpu,
-    url: "/#equipment",
+    url: "/equipment",
     tabValue: "equipment"
   },
   {
     title: "Monitoring",
     icon: Activity,
-    url: "/#monitoring",
+    url: "/monitoring",
     tabValue: "overview"
   },
   {
     title: "Analytics",
     icon: BarChart3,
-    url: "/#analytics",
+    url: "/analytics",
     tabValue: "models"
   },
   {
     title: "Alerts",
     icon: AlertTriangle,
-    url: "/#alerts",
+    url: "/alerts",
     tabValue: "alerts"
   },
   {
     title: "Data Center",
     icon: Database,
-    url: "/#data",
+    url: "/data",
     tabValue: "environment"
   },
   {
     title: "Settings",
     icon: Settings,
-    url: "/#settings",
+    url: "/settings",
     tabValue: "overview"
   },
 ];
@@ -65,20 +65,28 @@ export function AppSidebar() {
   const handleNavigation = (event: React.MouseEvent<HTMLAnchorElement>, tabValue: string) => {
     event.preventDefault();
     
-    // Get the current URL and extract the hash part if it exists
-    const url = new URL(window.location.href);
+    // Update URL hash for tab tracking
+    window.location.hash = tabValue;
     
-    // Set the new hash value
-    url.hash = tabValue;
+    // Find the corresponding tab and click it - using setTimeout to ensure DOM is ready
+    setTimeout(() => {
+      const tabElement = document.querySelector(`[data-state="inactive"][value="${tabValue}"]`);
+      if (tabElement) {
+        (tabElement as HTMLElement).click();
+      }
+    }, 0);
+  };
+
+  // Determine if an item is active based on URL path or hash
+  const isItemActive = (item: any) => {
+    if (currentPath === "/" && item.title === "Dashboard") return true;
+    if (item.url === currentPath) return true;
     
-    // Update browser URL without navigating
-    window.history.pushState({}, "", url.toString());
+    // Check if this item's tab value matches the current hash
+    const currentHash = window.location.hash.replace("#", "");
+    if (currentHash && currentHash === item.tabValue) return true;
     
-    // Find the corresponding tab and click it
-    const tabElement = document.querySelector(`[data-state="inactive"][value="${tabValue}"]`);
-    if (tabElement) {
-      (tabElement as HTMLElement).click();
-    }
+    return false;
   };
 
   return (
@@ -92,10 +100,10 @@ export function AppSidebar() {
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton 
                     asChild 
-                    className={(item.url === currentPath || (currentPath === "/" && item.title === "Dashboard")) ? "bg-accent text-white" : ""}
+                    className={isItemActive(item) ? "bg-accent text-white" : ""}
                   >
                     <a 
-                      href={item.url} 
+                      href={`/#${item.tabValue}`} 
                       className="flex items-center gap-3"
                       onClick={(e) => handleNavigation(e, item.tabValue)}
                     >

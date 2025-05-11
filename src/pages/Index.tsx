@@ -25,13 +25,31 @@ const Index = () => {
     setRefreshKey(prev => prev + 1);
   };
 
-  // Handle URL hash changes
+  // Handle URL hash changes and update the active tab
   useEffect(() => {
-    const hash = location.hash.replace("#", "");
-    if (hash && ["overview", "equipment", "alerts", "models", "environment"].includes(hash)) {
-      setActiveTab(hash);
-    }
-  }, [location.hash]);
+    const handleHashChange = () => {
+      const hash = window.location.hash.replace("#", "");
+      if (hash && ["overview", "equipment", "alerts", "models", "environment"].includes(hash)) {
+        setActiveTab(hash);
+      }
+    };
+    
+    // Set initial tab from URL hash
+    handleHashChange();
+    
+    // Add event listener for hash changes
+    window.addEventListener("hashchange", handleHashChange);
+    
+    // Clean up
+    return () => {
+      window.removeEventListener("hashchange", handleHashChange);
+    };
+  }, []);
+
+  // Force tab refresh when active tab changes
+  useEffect(() => {
+    console.log("Active tab changed to:", activeTab);
+  }, [activeTab]);
 
   return (
     <SidebarProvider>
