@@ -8,6 +8,11 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Settings from "./pages/Settings";
 import AIPrompt from "./pages/AIPrompt";
+import Equipment from "./pages/Equipment";
+import Monitoring from "./pages/Monitoring";
+import Analytics from "./pages/Analytics";
+import Alerts from "./pages/Alerts";
+import DataCenter from "./pages/DataCenter";
 
 const queryClient = new QueryClient();
 
@@ -20,6 +25,11 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/equipment" element={<Equipment />} />
+          <Route path="/monitoring" element={<Monitoring />} />
+          <Route path="/analytics" element={<Analytics />} />
+          <Route path="/alerts" element={<Alerts />} />
+          <Route path="/data" element={<DataCenter />} />
           <Route path="/ai-prompt" element={<AIPrompt />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

@@ -21,43 +21,36 @@ const menuItems = [
     title: "Dashboard",
     icon: Home,
     url: "/",
-    tabValue: "overview"
   },
   {
     title: "Equipment",
     icon: Cpu,
     url: "/equipment",
-    tabValue: "equipment"
   },
   {
     title: "Monitoring",
     icon: Activity,
     url: "/monitoring",
-    tabValue: "overview"
   },
   {
     title: "Analytics",
     icon: BarChart3,
     url: "/analytics",
-    tabValue: "models"
   },
   {
     title: "Alerts",
     icon: AlertTriangle,
     url: "/alerts",
-    tabValue: "alerts"
   },
   {
     title: "Data Center",
     icon: Database,
     url: "/data",
-    tabValue: "environment"
   },
   {
     title: "Settings",
     icon: Settings,
     url: "/settings",
-    tabValue: "overview"
   },
 ];
 
@@ -90,37 +83,20 @@ const promptItems = [
 ];
 
 export function AppSidebar() {
+  const navigate = useNavigate();
   const location = useLocation();
   const currentPath = location.pathname;
   const [showPrompts, setShowPrompts] = useState(false);
   const [aiInput, setAiInput] = useState("");
 
-  const handleNavigation = (event: React.MouseEvent<HTMLAnchorElement>, tabValue: string) => {
-    // Don't prevent default here - allow default behavior to open in new tab
-    
-    // Only add the hash if not opening in a new tab (middle click or ctrl+click)
-    if (!event.ctrlKey && event.button !== 1) {
-      window.location.hash = tabValue;
-      
-      // Find the corresponding tab and click it - using setTimeout to ensure DOM is ready
-      setTimeout(() => {
-        const tabElement = document.querySelector(`[data-state="inactive"][value="${tabValue}"]`);
-        if (tabElement) {
-          (tabElement as HTMLElement).click();
-        }
-      }, 0);
-    }
+  const handleNavigation = (url: string) => {
+    navigate(url);
   };
 
-  // Determine if an item is active based on URL path or hash
+  // Determine if an item is active based on URL path
   const isItemActive = (item: any) => {
     if (currentPath === "/" && item.title === "Dashboard") return true;
     if (item.url === currentPath) return true;
-    
-    // Check if this item's tab value matches the current hash
-    const currentHash = window.location.hash.replace("#", "");
-    if (currentHash && currentHash === item.tabValue) return true;
-    
     return false;
   };
 
@@ -158,12 +134,9 @@ export function AppSidebar() {
                       asChild 
                       className={isItemActive(item) ? "bg-accent text-accent-foreground" : ""}
                     >
-                      <a 
-                        href={`/#${item.tabValue}`} 
-                        className="flex items-center gap-3"
-                        onClick={(e) => handleNavigation(e, item.tabValue)}
-                        target="_blank" // Add target="_blank" to open in a new tab
-                        rel="noopener noreferrer" // Security best practice when using target="_blank"
+                      <div 
+                        className="flex items-center gap-3 cursor-pointer"
+                        onClick={() => handleNavigation(item.url)}
                       >
                         <item.icon size={18} />
                         <span>{item.title}</span>
@@ -172,7 +145,7 @@ export function AppSidebar() {
                             3
                           </span>
                         )}
-                      </a>
+                      </div>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 ))}
