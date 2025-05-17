@@ -14,6 +14,7 @@ import Analytics from "./pages/Analytics";
 import Alerts from "./pages/Alerts";
 import DataCenter from "./pages/DataCenter";
 import Benefits from "./pages/Benefits";
+import Troubleshooting from "./pages/Troubleshooting";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +34,7 @@ const App = () => (
           <Route path="/data" element={<DataCenter />} />
           <Route path="/ai-prompt" element={<AIPrompt />} />
           <Route path="/benefits" element={<Benefits />} />
+          <Route path="/troubleshooting" element={<Troubleshooting />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
