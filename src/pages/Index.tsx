@@ -60,7 +60,7 @@ const Index = () => {
           <div className="flex-1 p-6 lg:px-8">
             <div className="flex items-center justify-between">
               <DashboardHeader 
-                title="KPIT Predictive Guardian AI" 
+                title="Predictive Guardian AI" 
                 subtitle="Real-time equipment health monitoring and predictive maintenance"
                 onRefresh={handleRefresh}
               />

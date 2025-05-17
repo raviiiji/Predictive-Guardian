@@ -7,7 +7,7 @@ export function Navbar() {
   return (
     <div className="bg-primary h-16 px-6 flex items-center justify-between border-b border-border">
       <div className="flex items-center space-x-2">
-        <div className="font-bold text-xl text-white">KPIT Predictive Guardian AI</div>
+        <div className="font-bold text-xl text-white">Predictive Guardian AI</div>
       </div>
       <div className="flex items-center space-x-4">
         <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-white">

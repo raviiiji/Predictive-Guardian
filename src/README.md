@@ -1,5 +1,5 @@
 
-# KPIT Predictive Guardian AI
+# Predictive Guardian AI
 
 An AI-Driven Predictive Maintenance System for monitoring equipment health and predicting maintenance needs before failures occur.
 

@@ -136,7 +136,7 @@ export function AppSidebar() {
       <SidebarContent>
         <SidebarGroup>
           <div className="flex items-center justify-between">
-            <SidebarGroupLabel>KPIT Guardian AI</SidebarGroupLabel>
+            <SidebarGroupLabel>Predictive Guardian AI</SidebarGroupLabel>
             <Button 
               variant="ghost" 
               size="icon"
