@@ -96,18 +96,20 @@ export function AppSidebar() {
   const [aiInput, setAiInput] = useState("");
 
   const handleNavigation = (event: React.MouseEvent<HTMLAnchorElement>, tabValue: string) => {
-    event.preventDefault();
+    // Don't prevent default here - allow default behavior to open in new tab
     
-    // Update URL hash for tab tracking
-    window.location.hash = tabValue;
-    
-    // Find the corresponding tab and click it - using setTimeout to ensure DOM is ready
-    setTimeout(() => {
-      const tabElement = document.querySelector(`[data-state="inactive"][value="${tabValue}"]`);
-      if (tabElement) {
-        (tabElement as HTMLElement).click();
-      }
-    }, 0);
+    // Only add the hash if not opening in a new tab (middle click or ctrl+click)
+    if (!event.ctrlKey && event.button !== 1) {
+      window.location.hash = tabValue;
+      
+      // Find the corresponding tab and click it - using setTimeout to ensure DOM is ready
+      setTimeout(() => {
+        const tabElement = document.querySelector(`[data-state="inactive"][value="${tabValue}"]`);
+        if (tabElement) {
+          (tabElement as HTMLElement).click();
+        }
+      }, 0);
+    }
   };
 
   // Determine if an item is active based on URL path or hash
@@ -160,6 +162,8 @@ export function AppSidebar() {
                         href={`/#${item.tabValue}`} 
                         className="flex items-center gap-3"
                         onClick={(e) => handleNavigation(e, item.tabValue)}
+                        target="_blank" // Add target="_blank" to open in a new tab
+                        rel="noopener noreferrer" // Security best practice when using target="_blank"
                       >
                         <item.icon size={18} />
                         <span>{item.title}</span>
