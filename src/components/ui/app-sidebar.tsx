@@ -1,6 +1,6 @@
 
 import React, { useState } from "react";
-import { Home, Activity, Bell, Settings, Database, BarChart3, AlertTriangle, Cpu, Menu } from "lucide-react";
+import { Home, Activity, Bell, Settings, Database, BarChart3, AlertTriangle, Cpu, Menu, CheckCircle } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -46,6 +46,11 @@ const menuItems = [
     title: "Data Center",
     icon: Database,
     url: "/data",
+  },
+  {
+    title: "Benefits",
+    icon: CheckCircle,
+    url: "/benefits",
   },
   {
     title: "Settings",
