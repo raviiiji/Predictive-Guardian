@@ -6,8 +6,14 @@ import { Navbar } from "@/components/ui/navbar";
 import { Separator } from "@/components/ui/separator";
 import { PredictiveChart } from "@/components/dashboard/predictive-chart";
 import { VehicleHealthChart } from "@/components/dashboard/vehicle-health-chart";
+import { ButtonDemo } from "@/components/dashboard/button-demo";
+import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
+import { AlertTriangle } from "lucide-react";
 
 const Monitoring = () => {
+  const navigate = useNavigate();
+  
   return (
     <SidebarProvider>
       <div className="min-h-screen flex flex-col w-full bg-background text-foreground">
@@ -24,6 +30,15 @@ const Monitoring = () => {
             <Separator className="my-4" />
             
             <div className="space-y-6">
+              <Button 
+                variant="outline" 
+                className="mb-4 bg-blue-500/10 hover:bg-blue-500/20 text-blue-500"
+                onClick={() => navigate("/driver-analysis")}
+              >
+                <AlertTriangle className="mr-2 h-4 w-4" />
+                New Feature: View Driver Behavior Analysis
+              </Button>
+              
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 <PredictiveChart />
                 <VehicleHealthChart />

@@ -15,6 +15,7 @@ import Alerts from "./pages/Alerts";
 import DataCenter from "./pages/DataCenter";
 import Benefits from "./pages/Benefits";
 import Troubleshooting from "./pages/Troubleshooting";
+import DriverAnalysis from "./pages/DriverAnalysis";
 
 const queryClient = new QueryClient();
 
@@ -35,6 +36,7 @@ const App = () => (
           <Route path="/ai-prompt" element={<AIPrompt />} />
           <Route path="/benefits" element={<Benefits />} />
           <Route path="/troubleshooting" element={<Troubleshooting />} />
+          <Route path="/driver-analysis" element={<DriverAnalysis />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
