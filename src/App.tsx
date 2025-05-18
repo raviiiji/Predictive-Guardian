@@ -17,6 +17,7 @@ import Benefits from "./pages/Benefits";
 import Troubleshooting from "./pages/Troubleshooting";
 import DriverAnalysis from "./pages/DriverAnalysis";
 import ARVisualInspection from "./pages/ARVisualInspection";
+import ASIAModule from "./pages/ASIAModule";
 
 const queryClient = new QueryClient();
 
@@ -39,6 +40,7 @@ const App = () => (
           <Route path="/troubleshooting" element={<Troubleshooting />} />
           <Route path="/driver-analysis" element={<DriverAnalysis />} />
           <Route path="/ar-inspection" element={<ARVisualInspection />} />
+          <Route path="/asia-module" element={<ASIAModule />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
