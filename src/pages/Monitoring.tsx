@@ -6,7 +6,6 @@ import { Navbar } from "@/components/ui/navbar";
 import { Separator } from "@/components/ui/separator";
 import { PredictiveChart } from "@/components/dashboard/predictive-chart";
 import { VehicleHealthChart } from "@/components/dashboard/vehicle-health-chart";
-import { ButtonDemo } from "@/components/dashboard/button-demo";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { AlertTriangle } from "lucide-react";
